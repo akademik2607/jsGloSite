@@ -24,9 +24,7 @@ window.addEventListener('DOMContentLoaded', function(){
             indexInterval = setInterval(updateClock, 1000);     
         }
         else if(timer.timeRemaining < 0){
-            console.log(indexInterval);
             clearInterval(indexInterval);
-            console.log(indexInterval);
             timerHours.textContent = '00'; 
             timerMinutes.textContent = '00'; 
             timerSeconds.textContent = '00'; 
