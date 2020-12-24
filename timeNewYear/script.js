@@ -59,7 +59,6 @@ const getCurrentTime = () => {
 const newYearTimer = () => {
    const newYearTime = new Date('1 january 2021 00:00:00').getTime(), 
         days = Math.floor((newYearTime - timeNow.getTime()) / 1000 / 60 / 60 / 24); 
-        console.log("Новый год: " + newYearTime);
    return `До нового года осталось ${days} дней`;
 };
 
@@ -71,8 +70,3 @@ const showResult = () => {
 };
 
 showResult();
-console.log(timeStr);
-console.log(timeNow.toTimeString());
-console.log(timeNow.getHours());
-console.log(timeStr);
-console.log(timeNow);

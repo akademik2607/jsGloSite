@@ -1,5 +1,8 @@
 window.addEventListener('DOMContentLoaded', function(){
     'use strict';
+
+
+    //Таймер
     const timerHours = document.querySelector('#timer-hours'),
         timerMinutes = document.querySelector('#timer-minutes'),
         timerSeconds = document.querySelector('#timer-seconds');
@@ -24,9 +27,7 @@ window.addEventListener('DOMContentLoaded', function(){
             indexInterval = setInterval(updateClock, 1000);     
         }
         else if(timer.timeRemaining < 0){
-            console.log(indexInterval);
             clearInterval(indexInterval);
-            console.log(indexInterval);
             timerHours.textContent = '00'; 
             timerMinutes.textContent = '00'; 
             timerSeconds.textContent = '00'; 
@@ -40,5 +41,12 @@ window.addEventListener('DOMContentLoaded', function(){
     }
 
     updateClock();
+
+
+    //Меню
+        const toggleMenu = () => {
+            const btnMenu = document.querySelector('.btn-menu'),
+                menu = document.querySelector('menu');
+        };
     });
 
