@@ -18,15 +18,11 @@ window.addEventListener('DOMContentLoaded', function(){
         return { timeRemaining, hours, minutes, seconds};
     }
 
-    function updateClock(){
+    function updateClock(indexInterval){
 
-        const timer = getTimeRemaining('23 december 2020 22:03');
+        const timer = getTimeRemaining('31 december 2020 22:03');
 
-        let indexInterval; 
-        if(!indexInterval && timer.timeRemaining > 0){ 
-            indexInterval = setInterval(updateClock, 1000);     
-        }
-        else if(timer.timeRemaining < 0){
+        if(timer.timeRemaining < 0){
             clearInterval(indexInterval);
             timerHours.textContent = '00'; 
             timerMinutes.textContent = '00'; 
@@ -40,7 +36,8 @@ window.addEventListener('DOMContentLoaded', function(){
 
     }
 
-    updateClock();
+        let indexInterval = setInterval(updateClock, 1000);     
+    updateClock(indexInterval);
 
 
     //Меню

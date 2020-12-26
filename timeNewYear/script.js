@@ -39,6 +39,8 @@ const getDayOfWeek = () => `Сегодня ${weekDays[timeNow.getDay()]}`;
 ;
 
 const getCurrentTime = () => {
+    let timeNow = new Date(),
+    timeStr = timeNow.toTimeString().slice(0, 8);
     if(timeNow.getHours() > 12){
         timeStr += ' PM';
         const temp = timeNow.getHours() - 12;
@@ -56,6 +58,10 @@ const getCurrentTime = () => {
     return timeStr;
 };
 
+const changeTime = () => {
+       currentTime.textContent = `Текущее время: ${getCurrentTime()}`;
+};
+
 const newYearTimer = () => {
    const newYearTime = new Date('1 january 2021 00:00:00').getTime(), 
         days = Math.floor((newYearTime - timeNow.getTime()) / 1000 / 60 / 60 / 24); 
@@ -65,8 +71,8 @@ const newYearTimer = () => {
 const showResult = () => {
        goodDay.textContent = getHello();
        day.textContent = getDayOfWeek();
-       currentTime.textContent = `Текущее время: ${getCurrentTime()}`;
        dayCount.textContent = newYearTimer();
 };
 
 showResult();
+setInterval(changeTime, 1000);
