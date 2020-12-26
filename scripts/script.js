@@ -1,5 +1,6 @@
 window.addEventListener('DOMContentLoaded', function(){
     'use strict';
+    //Тайтер
     const timerHours = document.querySelector('#timer-hours'),
         timerMinutes = document.querySelector('#timer-minutes'),
         timerSeconds = document.querySelector('#timer-seconds');
@@ -39,6 +40,12 @@ window.addEventListener('DOMContentLoaded', function(){
 
     }
 
+    //меню
+    const toggleMenu = () => {
+        const btnMenu = document.querySelector('.btn-menu'),
+            menu = document.querySelector('menu');
+
+    };
     updateClock();
     });
 
