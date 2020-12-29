@@ -44,7 +44,6 @@ window.addEventListener('DOMContentLoaded', function(){
         const btnMenu = document.querySelector('.menu'),
             menu = document.querySelector('menu'),
             closeBtn = document.querySelector('.close-btn'),
-            menuItems = menu.querySelectorAll('ul>li');
         const actionMenu = () =>{
             menu.classList.toggle('active-menu');
 
@@ -121,6 +120,7 @@ const tabs = () => {
             }
         }
     };
+
     tabHeader.addEventListener('click', (event) => {
     let target = event.target.closest('.service-header-tab');
 
@@ -159,7 +159,7 @@ tabs();
 
         let currentSlide = 0,
         interval;
-
+        dot[currentSlide].classList.add('dot-active');
         
         const prevSlide = (element, index, strClass) => {
             element[index].classList.remove(strClass);
