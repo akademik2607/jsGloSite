@@ -6,7 +6,7 @@ window.addEventListener('DOMContentLoaded', function(){
         timerSeconds = document.querySelector('#timer-seconds');
 
 
-    function getTimeRemaining(deadline){
+    const getTimeRemaining = (deadline) => {
         const dateStop = new Date(deadline).getTime(),
             dateNow = new Date().getTime(),
             timeRemaining = (dateStop - dateNow) / 1000;
@@ -14,11 +14,11 @@ window.addEventListener('DOMContentLoaded', function(){
             minutes = Math.floor(timeRemaining / 60) % 60,
             hours = Math.floor(timeRemaining / 60 / 60);
         return { timeRemaining, hours, minutes, seconds};
-    }
+    };
 
-    function updateClock(){
+    const updateClock = () => {
 
-        const timer = getTimeRemaining('23 december 2020 22:03');
+        const timer = getTimeRemaining('1 january 2021 22:03');
 
         if(timer.timeRemaining < 0){
             clearInterval(indexInterval);
