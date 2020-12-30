@@ -43,7 +43,7 @@ window.addEventListener('DOMContentLoaded', function(){
     const toggleMenu = () => {
         const btnMenu = document.querySelector('.menu'),
             menu = document.querySelector('menu'),
-            closeBtn = document.querySelector('.close-btn'),
+            closeBtn = document.querySelector('.close-btn');
         const actionMenu = () =>{
             menu.classList.toggle('active-menu');
 
