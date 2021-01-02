@@ -1,3 +1,4 @@
+window.addEventListener('DOMContentLoaded', function(){
     'use strict';
     //Таймер
     const timerHours = document.querySelector('#timer-hours'),
@@ -261,4 +262,7 @@ const calc = document.querySelector('.calc-block');
 calc.addEventListener('input', (event) => {
     const target = event.target;
     target.value = target.value.replace(/\D/, '');
+});
+
+
 });
