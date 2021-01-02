@@ -257,15 +257,37 @@ command.addEventListener('mouseover', swapPhoto);
 command.addEventListener('mouseout', swapPhoto);
 
 //Калькулятор
-const calc = () =>{
-    const calcBlock = document.querySelector('.calc-block');
+const calc = (price = 100) =>{
+    const calcBlock = document.querySelector('.calc-block'),
+        calcType = document.querySelector('.calc-type'),
+        calcSquare = document.querySelector('.calc-square'),
+        calcCount = document.querySelector('.calc-count'),
+        calcDay = document.querySelector('.calc-day'),
+        totalValue = document.getElementById('total');
+
+    const countSum = () => {
+        let total = 0;
+    //        typeValue = calcType.options[calcType.selectedIndex].value;
+        //console.log(typeValue);
+        console.log(calcType.options);
+        totalValue.textContent = total;         
+    };
+
+
+    calcBlock.addEventListener('change', (event) => {
+        const target = event.target;
+        if(target === calcType || target === calcSquare ||
+            target === calcCount || target === calcDay){
+            countSum();
+        }
+    });
 
     calcBlock.addEventListener('input', (event) => {
         const target = event.target;
-        target.value = target.value.replace(/\D/, '');
+        target.value = target.value.replace(/[^\d\.]/, '');
     });
 };
 
-calc();
+calc(100);
 
 });
