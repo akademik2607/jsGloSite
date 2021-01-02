@@ -266,10 +266,26 @@ const calc = (price = 100) =>{
         totalValue = document.getElementById('total');
 
     const countSum = () => {
-        let total = 0;
-    //        typeValue = calcType.options[calcType.selectedIndex].value;
-        //console.log(typeValue);
-        console.log(calcType.options);
+        let total = 0,
+            countValue = 1,
+            dayValue = 1;
+        const typeValue = calcType.options[calcType.selectedIndex].value,
+            squareValue = +calcSquare.value;
+
+        if(+calcCount.value > 1){
+            countValue += (calcCount.value - 1) / 10;
+        }
+
+        if(calcDay.value && +calcDay.value < 5){
+            dayValue *= 2;
+        }else if(calcDay.value && +calcDay.value < 10){
+            dayValue *= 1.5;
+        }
+
+
+        if(typeValue && squareValue){
+            total = price * typeValue * squareValue * countValue * dayValue;
+        }
         totalValue.textContent = total;         
     };
 
@@ -284,7 +300,10 @@ const calc = (price = 100) =>{
 
     calcBlock.addEventListener('input', (event) => {
         const target = event.target;
-        target.value = target.value.replace(/[^\d\.]/, '');
+        if(target.matches('select')){
+            return;
+        }
+        target.value = target.value.replace(/\D/, '');
     });
 };
 
