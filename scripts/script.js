@@ -1,4 +1,3 @@
-window.addEventListener('DOMContentLoaded', function(){
     'use strict';
     //Таймер
     const timerHours = document.querySelector('#timer-hours'),
@@ -239,7 +238,27 @@ tabs();
     };
     slider();
 
+//Наведение на фото нашей команды
 
+const command = document.getElementById('command');
 
-    });
+const swapPhoto = (event) => {
+    const target = event.target;
+    if(!target.matches('.command__photo')){
+        return;
+    }
+const tempData = target.src;
+    target.src = target.dataset.img;
+    target.dataset.img = tempData;
+}
 
+command.addEventListener('mouseover', swapPhoto); 
+command.addEventListener('mouseout', swapPhoto);
+
+//Калькулятор
+const calc = document.querySelector('.calc-block');
+
+calc.addEventListener('input', (event) => {
+    const target = event.target;
+    target.value = target.value.replace(/\D/, '');
+});
