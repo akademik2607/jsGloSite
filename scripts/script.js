@@ -262,6 +262,9 @@ const calc = () =>{
 
     calcBlock.addEventListener('input', (event) => {
         const target = event.target;
+        if(target.matches('select')){
+            return;
+        }
         target.value = target.value.replace(/\D/, '');
     });
 };
