@@ -257,12 +257,15 @@ command.addEventListener('mouseover', swapPhoto);
 command.addEventListener('mouseout', swapPhoto);
 
 //Калькулятор
-const calc = document.querySelector('.calc-block');
+const calc = () =>{
+    const calcBlock = document.querySelector('.calc-block');
 
-calc.addEventListener('input', (event) => {
-    const target = event.target;
-    target.value = target.value.replace(/\D/, '');
-});
+    calcBlock.addEventListener('input', (event) => {
+        const target = event.target;
+        target.value = target.value.replace(/\D/, '');
+    });
+};
 
+calc();
 
 });
