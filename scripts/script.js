@@ -375,12 +375,18 @@ const sendForm = (formId) => {
 const validForm = (event) => {
         const target = event.target;
             if(target.name === 'user_name'){
-                target.value = target.value.replace(/[^А-Яа-я ]/, '');
+                target.value = target.value.replace(/[^А-Яа-я -]/, '');
+                target.pattern = '[А-Яа-я -]{2,50}';
             }else if(target.name === 'user_phone'){
                 target.value = target.value.replace(/[^\d\+]/, '');
+                target.pattern = '[\\d+]{11,}';
             }else if(target.name === 'user_message'){
                 target.value = target.value.replace(/[^\dА-Яа-я \.,\?\:\;\"\'!]/, '');
+            }else if(target.name === 'user_email'){
+                target.value = target.value.replace(/[^\w-@\.]/, '');
+                target.pattern = '[\\w-]+@\\w+\\.[a-zA-z]{2,3}';
             }
+             
         };
 
 const formAction = () => {
