@@ -309,4 +309,92 @@ const calc = (price = 100) =>{
 
 calc(100);
 
+
+//send-AJAX-form
+
+const sendForm = (formId) => {
+    const errorMessage = 'Что то пошло не так...',
+        loadMessage = 'Загрузка...',
+        succesMessage = 'Спасибо! Мы скоро с Вами свяжемся!';
+    const form = document.getElementById(formId),
+        formInputs = form.querySelectorAll('input'),
+        statusMessage = document.createElement('div');
+        statusMessage.style.cssText = 'font-size: 2rem; color: white';
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        form.appendChild(statusMessage);
+        statusMessage.textContent = loadMessage;
+
+        const formData = new FormData(form),
+            body = {};
+
+        for(let val of formData.entries()){
+            body[val[0]] = val[1];
+        }
+
+        formInputs.forEach((elem) => {
+            elem.value = '';
+        });
+        
+        postData(body, () => {
+                statusMessage.textContent = succesMessage;
+        }, 
+        (error) => {
+            console.error(error);
+            statusMessage.textContent = errorMessage;
+        });
+        
+    });
+};
+
+
+    const postData = (body, outputData, errorData) => {
+        const request = new XMLHttpRequest();
+        request.addEventListener('readystatechange', () => {
+
+            if(request.readyState !== 4){
+                return;
+            }
+
+            if(request.status === 200){
+                outputData();
+            }
+            else{
+                errorData(request.status);
+            }
+        });
+        request.open('POST', './server.php');
+        request.setRequestHeader('Content-Type', 'application/json');
+
+        request.send(JSON.stringify(body));
+
+    };
+//Валидация полей формы
+
+const validForm = (event) => {
+        const target = event.target;
+            if(target.name === 'user_name'){
+                target.value = target.value.replace(/[^А-Яа-я ]/, '');
+            }else if(target.name === 'user_phone'){
+                target.value = target.value.replace(/[^\d\+]/, '');
+            }else if(target.name === 'user_message'){
+                target.value = target.value.replace(/[^\dА-Яа-я \.,\?\:\;\"\'!]/, '');
+            }
+        };
+
+const formAction = () => {
+    const forms = document.querySelectorAll('form');
+    forms.forEach((elem) => {
+        elem.addEventListener('input', validForm);
+        sendForm(elem.id);
+    });
+};
+
+formAction();
+
+    
+
+
+
 });
