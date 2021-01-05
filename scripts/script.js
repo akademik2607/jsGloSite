@@ -337,43 +337,32 @@ const sendForm = (formId) => {
             elem.value = '';
         });
 
-        const errorData = (error) => {
+        postData(body)
+        .then((response) => {
+            if(response.status !== 200){
+                throw new Error('Статус не 200!');
+            }
+            statusMessage.textContent = succesMessage;
+        })
+        .catch((error) => {
             console.error(error);
             statusMessage.textContent = errorMessage;
-        };
-        const outputData = () => {
-            statusMessage.textContent = succesMessage;
-        };
-
-        postData(body)
-        .then(outputData)
-        .catch(errorData);
+        });
         
     });
 };
 
 
     const postData = (body) => {
-            return new Promise((resolve, reject) => {
-            const request = new XMLHttpRequest();
-            request.addEventListener('readystatechange', () => {
+            return fetch('./server.php',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body)
 
-                if(request.readyState !== 4){
-                    return;
-                }
-
-                if(request.status === 200){
-                    resolve();
-                }
-                else{
-                    reject(request.status);
-                }
             });
-            request.open('POST', './server.php');
-            request.setRequestHeader('Content-Type', 'application/json');
-
-            request.send(JSON.stringify(body));
-        });
+           
     };
 //Валидация полей формы
 
