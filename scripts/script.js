@@ -336,39 +336,44 @@ const sendForm = (formId) => {
         formInputs.forEach((elem) => {
             elem.value = '';
         });
-        
-        postData(body, () => {
-                statusMessage.textContent = succesMessage;
-        }, 
-        (error) => {
+
+        const errorData = (error) => {
             console.error(error);
             statusMessage.textContent = errorMessage;
-        });
+        };
+        const outputData = () => {
+            statusMessage.textContent = succesMessage;
+        };
+
+        postData(body)
+        .then(outputData)
+        .catch(errorData);
         
     });
 };
 
 
-    const postData = (body, outputData, errorData) => {
-        const request = new XMLHttpRequest();
-        request.addEventListener('readystatechange', () => {
+    const postData = (body) => {
+            return new Promise((resolve, reject) => {
+            const request = new XMLHttpRequest();
+            request.addEventListener('readystatechange', () => {
 
-            if(request.readyState !== 4){
-                return;
-            }
+                if(request.readyState !== 4){
+                    return;
+                }
 
-            if(request.status === 200){
-                outputData();
-            }
-            else{
-                errorData(request.status);
-            }
+                if(request.status === 200){
+                    resolve();
+                }
+                else{
+                    reject(request.status);
+                }
+            });
+            request.open('POST', './server.php');
+            request.setRequestHeader('Content-Type', 'application/json');
+
+            request.send(JSON.stringify(body));
         });
-        request.open('POST', './server.php');
-        request.setRequestHeader('Content-Type', 'application/json');
-
-        request.send(JSON.stringify(body));
-
     };
 //Валидация полей формы
 
