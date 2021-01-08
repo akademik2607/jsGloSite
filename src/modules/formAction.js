@@ -5,8 +5,9 @@ const sendForm = (formId) => {
         succesMessage = 'Спасибо! Мы скоро с Вами свяжемся!';
     const form = document.getElementById(formId),
         formInputs = form.querySelectorAll('input'),
-        statusMessage = document.createElement('div');
-        statusMessage.style.cssText = 'font-size: 2rem; color: white';
+        statusMessage = document.createElement('div'),
+        popup = document.querySelector('.popup');
+        statusMessage.style.cssText = 'font-size: 2rem; color: white',
 
     form.addEventListener('submit', (event) => {
         event.preventDefault();
@@ -30,10 +31,16 @@ const sendForm = (formId) => {
                 throw new Error('Статус не 200!');
             }
             statusMessage.textContent = succesMessage;
+            setTimeout(() => {
+                statusMessage.textContent = '';
+                popup.style.display = 'none';
+            }, 5000);
+            console.log(form);
         })
         .catch((error) => {
             console.error(error);
             statusMessage.textContent = errorMessage;
+            setTimeout(() => statusMessage.textContent = '', 3000);
         });
         
     });
